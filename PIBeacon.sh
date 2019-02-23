@@ -1,5 +1,17 @@
 #!/bin/bash
 
+set -e
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root"
+    exit 1
+fi
+
+if [[ $# -ne 3 ]]; then
+	echo "Incorrect number of arguments"
+	exit 1
+fi
+
 UUID=$(python3 -c "import uuid; hexstring=uuid.UUID(\"$1\").hex.upper(); print(' '.join([hexstring[i:i+2] for i in range(0, len(hexstring), 2)]))")
 MAJOR=$(printf '%x' $2)
 MINOR=$(printf '%x' $3)

@@ -1,0 +1,11 @@
+[Unit]
+Description=Setup PIBeacon
+Requisite=bluetooth.target
+After=bluetooth.target
+
+[Service]
+Type=simple
+ExecStart=/home/pi/PIBeacon/PIBeacon.sh UUID MAJOR MINOR
+
+[Install]
+WantedBy=bluetooth.target
